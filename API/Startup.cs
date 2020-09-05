@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Core.Interfaces;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,7 +31,7 @@ namespace API
             var connection = "Server=.\\SQLExpress;Database=SkinetDb;Trusted_Connection=True;ConnectRetryCount=0;";
             services.AddControllers();
             services.AddDbContext<StoreContext>(options => options.UseSqlServer(connection));
-            //services.AddDbContext<StoreContext>(x => x.UseSqlServer(_config.GetConnectionString("DefaultConnection")));
+            services.AddScoped<IProductRepository, ProductRepository>();
         }
 
         private void connection(SqlServerDbContextOptionsBuilder obj)
